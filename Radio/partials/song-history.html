@@ -1,0 +1,20 @@
+﻿<!--<ul class="nav nav-tabs">
+    <li><a href="#/radio/list" data-toggle="tab">Stations</a></li>
+    <li class="active"><a href="#/radio/history" data-toggle="tab">Song History</a></li>
+    <li><a href="#/radio/favorite" data-toggle="tab">Favorites</a></li>
+</ul>-->
+<div class="view-title">
+    <h3>Song History</h3>
+</div>
+
+<ul class="title-list unstyled">
+    <li ng-repeat="song in history">
+        <div class="title">
+            <a href="" ng-click='play($index)'><img src="img/Music-Green.png" align="left"/></a>
+            <a href="" class="songName" ng-click='play($index)'>{{song.title}}</a>
+            <a href="#/radio/artist/{{song.artist}}" class="artistName unknown-{{checkUnknown(song)}}">{{song.artist}}</a>
+        </div>
+
+        <!--<a href="" ng-click='play($index)'>{{song.artist}} - {{song.title}}</a>-->
+    </li>
+</ul>

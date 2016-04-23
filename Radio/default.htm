@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="myRadio">
+<head>
+    <meta charset="utf-8" />
+    <title ng-bind="$root.title"></title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="app.css" rel="stylesheet" />
+    <!--<link href="css/font-awesome.min.css" rel="stylesheet" />-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.js"></script>
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="app.js"></script>
+    <script src="controllers.js"></script>
+    <script src="services.js"></script>
+    <script src="directives.js"></script>
+    <!--<script src="js/Combined.min.js"></script>-->
+    <script>
+        var Debug = window.console;
+        $(document).keydown(function (e) {
+            //alert(e.keyCode);
+            switch (e.keyCode) {
+                case 0xB3:  // VK_MEDIA_PLAY_PAUSE
+                    $("#pause").click();
+                    break;
+                case 0xB0:  // VK_MEDIA_NEXT_TRACK
+                    $("#next").click();
+                    break;
+            }
+        });
+    </script>
+</head>
+<body>
+
+    <div id="mainCtrl" class="container" ng-controller="MainCtrl">
+
+        <div id="wrap" class="row">
+            <div id="header" class="navbar navbar-fixed-top navbar-inverse">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+
+                    <!-- サイト名 -->
+                    <a href="#/radio/list" class="brand">{{brand}}</a>
+
+                    <!-- ラジオステーション名 -->
+                    <a href="#/radio/config" class="brand" style="font-size:medium"><i class="icon-music"></i> {{stationName()}}</a>
+
+                    <!-- 検索窓 -->
+                    <form class="navbar-search form-search pull-right" ng-submit="doSearch()" name="myForm">
+                        <div class="input-append input-prepend">
+                            <a href="" class="add-on" ng-click="toggleSearch()"><i class="icon-search settings-{{trackSearch}}"></i></a>
+                            <input type="text" class="search-query" placeholder="{{placeHolder()}}" ng-model="query"/>
+                        </div>
+                    </form>
+
+                    <!-- ドロップダウンメニュー -->
+                    <ul class="nav pull-right" role="navigation">
+                        <li class="dropdown">
+                            <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-cog"></i><b class="caret"></b></a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#/radio/history">Song History</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#/radio/favorite">Favorite Songs</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#/radio/donot">Banned Songs</a></li>
+                                <li role="presentation" class="divider"></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#/radio/config">Edit Station</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+ 
+                    </div>
+                </div>
+            </div>
+ 
+            <div class="span6 " id="sidebar">
+                <div class="sidebar-nav-fixed">
+
+                <!-- 曲タイトル -->
+                <div class="title-playing">
+                    <div class="track-name">{{playContext.trackPlay.title}}</div>
+                    <a href="#/radio/artist/{{playContext.trackPlay.artist}}" 
+                        class="track-artist unknown-{{checkUnknown(playContext.trackPlay)}}">{{playContext.trackPlay.artist}}</a>
+                </div>
+
+                <!-- プレーヤー -->
+                <!--<ng-include src="'partials/player.html'"></ng-include>-->
+                <div ng-controller="PlayerCtrl" style="">
+
+                    <!-- YouTube Player -->
+                    <div id="nori" style="position:relative" ng-show="show">
+                        <div id="player1" class="player" style="position:absolute"></div>
+                        <div id="player2" class="player" style="position:static"></div>
+                    </div>
+
+                    <!-- Pause, Next -->
+                    <span class="btn-group" ng-show="true">
+                        <button class="btn" id="pause" ng-click="doPause()" ng-disabled="!checkReady() || !playContext.trackPlay">
+                            <span ng-show="playContext.isPlaying"><i class="icon-pause"></i> Pause</span>
+                            <span ng-show="!playContext.isPlaying"><i class="icon-play"></i> Play</span>
+                        </button>
+                        <button class="btn" id="next" ng-click="doNext()" ng-disabled="!playContext.trackCue"><i class="icon-step-forward"></i> Next</button>
+                    </span>
+
+                    <!-- ♥ 〇 ■　-->
+                    <span class="btn-group" ng-show="true">
+                        <a class="tooltip2" title="Play More"><button class="btn" ng-click="addFavorite()" ng-disabled="!checkReady() || !playContext.trackPlay">
+                            <i class="icon-heart"></i></button></a>
+                        <a class="tooltip2" title="Don't Play"><button class="btn" ng-click="addDonot()" ng-disabled="!checkReady() || !playContext.trackPlay">
+                            <i class="icon-ban-circle"></i></button></a>
+                        <a class="tooltip2" title="Wrong song being played"><button class="btn" ng-click="startEditing()" ng-disabled="!checkReady() || !playContext.trackPlay">
+                            <i class="icon-tag"></i></button></a>
+                        <a class="tooltip2" title="{{eyeTitle()}}"><button class="btn" ng-click="toggleShow()">
+                            <i class="{{eyeIcon()}}"></i></button></a>
+                    </span>
+
+                    <!-- Repeat / Cross-Fade -->
+                    <span class="btn-group" ng-show="playContext.trackPlay" style="position:relative">
+                        <a href="" id="btn-crossFade" ng-click="toggleFade()" class="tooltip2" title="Crossfading">
+                            <img src="img/cross-fade.png" class="settings-{{settings.crossFade}}" /></a>
+                            <!--<i class="icon-random settings-{{settings.crossFade}}"></i></a>-->
+                        <a href="" ng-click="toggleRepeat()" class="tooltip2" title="Repeat">
+                            <i id="btn-repeat" class="icon-repeat settings-{{settings.repeat}}"></i></a>
+                    </span>
+
+                    <!-- VideoID edit -->
+                    <div id="video-edit" style="width:330px">
+                    <form class="well" x-ng-show="editing">
+                        <div class="control-group">
+                            <label class="control-label">Correct YouTube Video ID</label>
+                            <div class="controls">
+                                <input type="text" ng-model="videoId" ng-focus-lost="onLostFocus()" ng-change="changed()">
+                                <span class="help-inline">{{errorMessage}}</span>
+                            </div>
+                        </div>
+                        <!--<pre>{{video|json}}</pre>-->
+                        <div class="control-group">
+                            <label class="control-label">Start Seconds</label>
+                            <div class="controls input-append">
+                                <span class="input-small uneditable-input">{{stSec}}</span>
+                                <button class="btn" type="button"  ng-click="onSetStartSec()">Set</button>
+                                <button class="btn" type="button" ng-click="onResetStartSec()">Clear</button>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <button type="submit" class="btn" ng-click="doAdjust()">OK</button>
+                                <button class="btn" ng-click="onLostFocus()">Cancel</button>
+<!--                                <button class="btn" style="float: right" ng-click="dontPlay()" title="Don't play this video">
+                                    <i class="icon-ban-circle"></i></button>-->
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+
+                </div>
+
+                <!-- アーティストクラウド -->
+                <ul class="artist-cloud unstyled" ng-show="station">
+                    <li ng-repeat="artist in station.artists" style="display:inline; margin:0px 0px" class="tagcloud">
+                        <!--<a href="#/radio/{{$index}}" x-ng-show="artist.match > 0"-->
+                        <a href="#/radio/artist/{{artist.name}}" x-ng-show="artist.match > 0"
+                            class="match{{artist.match}}">{{ artist.name }}</a>
+                    </li>
+                </ul>
+
+                </div>
+            </div>
+ 
+            <div class="span6" id="content" ng-class="checkWelcome()">
+                <div ng-view></div>
+            </div>
+        </div>
+
+        <!-- ローディング中... -->
+        <img id="now-loading" src="img/now-loading.gif" alt="Loading..." ng-show="loading" />
+
+        <div id="footer">
+            <div class="copyright">
+                <a href="" ng-click="debug()">*</a>
+                powered by <a href="http://www.last.fm">AudioScrobbler</a> & <a href="http://www.youtube.com">YouTube</a>
+                &copy; {{dt | date:'yyyy'}}<a href="mailto:kxmori@gmail.com"> Kenichiro Mori</a>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

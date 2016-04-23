@@ -1,0 +1,19 @@
+﻿<div class="hero-unit welcome">
+    <h1>Welcome to {{brand}}</h1>
+    <p>This is a simple internet radio with Last.fm and YouTube Web Services.</p>
+    <div class="search">
+        <p>
+            Please enter the name of your favorite artist.
+        </p>
+        <form class="search" ng-submit="doSearch(artistName)">
+            <div class="input-append">
+                <input class="input-xlarge" type="text" ng-model="artistName" placeholder="artist" />
+                <button class="btn" type="submit"><i class="icon-play"></i></button>
+            </div>
+        </form>
+    </div>
+    <div class="logo">
+        <a href="http://www.last.fm"><img src="img/badge_red_small.gif" alt="powered by AudioScrobbler" /></a>
+        <a href="http://www.youtube.com"><img src="img/yt-brand-standard-logo-95x40.png" alt="powered by YouTube" /></a>
+    </div>
+</div>

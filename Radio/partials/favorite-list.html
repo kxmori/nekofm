@@ -1,0 +1,58 @@
+﻿<div class="view-title">
+    <h3>Favorite Songs</h3>
+</div>
+
+<ul class="inline text-right sub-menu">
+    <button class="btn " ng-click="playAll()" ng-show="favorites.length > 0"><i class="icon-play"></i> Play all</button>
+    <button class="btn" ng-click="startEditing()"><i class="icon-plus"></i> Add a song</button>
+</ul>
+
+<form name="form" class="well" ng-show="editing" ng-focus="editing" ng-submit="add()">
+  <div class="control-group">
+    <label class="control-label">Artist Name</label>
+    <div class="controls">
+        <input type="text" ng-model="track.artist" ng-focus="editing">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Song Title</label>
+    <div class="controls">
+        <input type="text" ng-model="track.title" >
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">YouTube Video ID</label>
+    <div class="controls">
+        <input type="text" ng-model="videoId" name="videoId" ng-change="changed()" required>
+        <span class="help-inline">{{errorMessage}}</span>
+        <!--<span ng-show="form.videoId.$error.not-found">Video not found</span>-->
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn">Add</button>
+      <button type="reset" class="btn" ng-click="onLostFocus()">Cancel</button>
+    </div>
+  </div>
+</form>
+
+<ul class="title-list unstyled">
+    <!--<li ng-repeat="entry in filtered = (favorites | favFilter: getStationId())">-->
+    <li ng-repeat="entry in favorites">
+
+        <div class="title">
+            <a href="" ng-click='play(entry)'><img src="img/Love.png" width="28" align="left"/></a>
+            <a href="" class="play" ng-click='togglePlay(entry)' ng-show="checkStation()"><img ng-src="{{playIcon(entry)}}"/></a>
+
+            <a href="" class="songName" ng-click='play(entry)'>{{entry.title}}</a>
+            <a href="#/radio/artist/{{entry.artist}}" class="artistName unknown-{{checkUnknown(entry)}}">{{entry.artist}}</a>
+            <!--<br clear="left" />-->
+        </div>
+
+        <span class="remove" ng-click="remove(entry)"></span>
+    </li>
+</ul>
+
+<!--<pre>{{song|json}}</pre>-->
+
+

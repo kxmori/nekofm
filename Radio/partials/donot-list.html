@@ -1,0 +1,16 @@
+﻿<div class="view-title">
+    <h3>Banned Songs</h3>
+</div>
+
+<ul class="title-list unstyled">
+    <li ng-repeat="entry in donots">
+
+        <div class="title">
+            <a href="" ng-click='play(entry)'><img src="img/Banned-icon.png" width="32" align="left"/></a>
+            <a href="" class="songName" ng-click='play(entry)'>{{entry.title}}</a>
+            <a href="#/radio/artist/{{entry.artist}}" class="artist unknown-{{checkUnknown(entry)}}">{{entry.artist}}</a>
+        </div>
+
+        <span class="remove" ng-click="remove(entry)"></span>
+    </li>
+</ul>

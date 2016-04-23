@@ -1,0 +1,29 @@
+﻿<!--<ul class="nav nav-tabs">
+    <li class="active"><a href="#1" data-toggle="tab">Stations</a></li>
+    <li><a href="#/radio/history" data-toggle="tab">Song History</a></li>
+    <li><a href="#/radio/favorite" data-toggle="tab">Favorites</a></li>
+</ul>-->
+<div class="view-title">
+    <h3>Stations</h3>
+    <h4 style="text-align:right"><a href="" ng-click="newStation()">New Station</a></h4>
+</div>
+
+<ul class="station-list unstyled">
+    <li ng-repeat="(key, st) in stationList">
+
+        <div class="well station active-{{st.name == station.name}}">
+            <!--<a href="" class="icon"><img src="img/Star Off.png" width="32"/></a>-->
+            <!--<a href="" class="icon" ng-click='changeStation(key)'></a>-->
+            <a href="" ng-click='changeStation(key)'><img src="img/leaf.gif" class="icon" /></a>
+            <a href="" class="station-name" ng-show="!st.editing" ng-click='changeStation(key)'>{{st.name}}</a>
+
+            <form onkeydown="javascript:if(event.keyCode==27) return false;" class="new-name" ng-show="st.editing" ng-submit="doRename(key)">
+                <input type="text" ng-model="st.name" ng-focus="st.editing" ng-focus-lost="onLostFocus(key)">
+            </form>
+
+            <span class="station-rename" ng-click="startEditing(key)" ng-show="!st.editing" title="Rename"><i class="icon-edit"></i></span>
+            <span class="station-remove" ng-click="removeStation(key)"></span>
+        </div>
+
+    </li>
+</ul>

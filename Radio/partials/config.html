@@ -1,0 +1,35 @@
+﻿<!--<ul class="nav nav-tabs">
+    <li class="active"><a href="#1" data-toggle="tab">Station config</a></li>
+    <li><a href="#/radio/favorite" data-toggle="tab">Favorits</a></li>
+</ul>-->
+<div class="view-title">
+    <h3>Station Details</h3>
+    <h4>'{{station.name}}'</h4>
+</div>
+
+<!--<div class="well">-->
+<div class="">
+    <ul class="artist-list unstyled" ng-show="station">
+        <li ng-repeat="artist in artists">
+            <a href="#/radio/config/{{$index}}" class="name songless-{{artist.songs.length == 0}}">{{artist.name}}</a>
+            <span class="match">{{artist.match}}</span>
+            <span class="up tooltip2" title="More"><i class="icon-plus-sign" ng-click="thumbsUp($index)"></i></span>
+            <span class="down tooltip2" title="Less"><i class="icon-minus-sign" ng-click="thumbsDown($index)"></i></span>
+            <span class="remove" ng-click="removeArtist($index)"></span>
+<!--            <input class="match" id="range1" type="range" min="0" max="10" step="1"
+                ng-model="artist.match" ng-change="changed($index)" />-->
+<!--            <span class="songs" ng-click="startEditing($index)">{{artist.songCount}}songs</span>
+            <form class="songs-edit" x-ng-show="artist.editing" ng-submit="doAdjust($index)">
+                <input class="span1" type="text" x-ng-model="artist.songCount" x-ng-focus="artist.editing" ng-focus-lost="onLostFocus($index)">
+            </form>-->
+        </li>
+    </ul>
+    <form ng-submit="addArtist()">
+        <!--<input type="text" ng-model="newArtist" placeholder="new artist"">-->
+        <!--<button type="submit" class="btn" ng-click="addArtist()">Add</button>-->
+        <div class="input-append">
+            <input class="input-xlarge" type="text" ng-model="newArtist" placeholder="another artist" />
+            <button class="btn" type="submit"><i class="icon-plus"></i> Add</button>
+        </div>
+    </form>
+</div>

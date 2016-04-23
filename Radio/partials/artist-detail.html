@@ -1,0 +1,33 @@
+<div class="view-title">
+    <h3>{{artist.name}}</h3>
+    <h4 style="text-align:right"><a href="http://www.last.fm/music/{{artist.name}}" target=h_blankh>Artist Profile</a></h4>
+</div>
+
+<table>
+    <tr ng-repeat="song in artist.songs">
+        <td class="icon" ng-click="setSongCount($index)">
+            <img src="img/Music-Green.png" ng-show="$index < getSongCount($index)" />
+        </td>
+        <td class="number">
+            {{$index+1}}
+        </td>
+        <td class="text">
+            <a href="" ng-click='play($index)'>{{song.name}}</a>
+        </td>
+        <td class="number">
+            <span>{{song.playcount}}</span>
+        </td>
+    </tr>
+</table>
+
+<!--<ol class="song-list">
+    <li ng-repeat="song in artist.songs">
+        <img src="img/Music-Blue.png" ng-show="$index < artist.songCount"  width="16" />
+        <a href="" ng-click='play($index)'>{{song.name}}</a>
+        <span>({{song.playcount}})</span>
+        <span class="favorite" ng-click="addFavorite($index)"></span>
+        <span class="thumbs-down" ng-click="addThumbsDown($index)"></span>
+    </li>
+</ol>-->
+<!--<button class="btn btn-info btn-block max-{{ (artist.songs == null) || ((artist.songs.length%60)!=0) }}"--> 
+<button class="btn btn-info btn-block" ng-show="!artist.maxout && !loading" ng-click="getMoreSongs()">More</button>

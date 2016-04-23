@@ -1,0 +1,25 @@
+﻿<!--<h5>Search results for '{{results.query}}': {{results.totalResults}} found</h5>-->
+<h4>{{results.totalResults}} results</h4>
+
+<table>
+    <tr ng-repeat="track in results.tracks">
+        <td class="number">
+            {{(results.page-1)*30+$index+1}}.
+        </td>
+        <td class="text">
+            <a href="" ng-click='play($index)'>{{track.artist}} - {{track.title}}</a>
+        </td>
+    </tr>
+</table>
+
+<!--<ul class="song-list unstyled">
+    <li ng-repeat="track in results.tracks">
+        {{(results.page-1)*30+$index+1}}.
+        <a href="" ng-click='play($index)'>{{track.artist}} - {{track.title}}</a>
+        <span class="favorite" ng-click="addFavorite($index)"></span>
+    </li>
+</ul>-->
+<ul class="pager">
+    <li><a href="#/radio/search?q={{results.query}}&p={{results.page-1}}" ng-show="results.page > 1">Previous</a></li>
+    <li><a href="#/radio/search?q={{results.query}}&p={{results.page+1}}" ng-show="checkNext()">Next</a></li>
+</ul>

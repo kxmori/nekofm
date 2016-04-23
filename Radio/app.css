@@ -1,0 +1,578 @@
+﻿html, body {
+    height: 90%;
+}
+body {
+    font-family: 'Tahoma','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ',Meiryo,'Segoe UI',sans-serif;
+    padding-bottom: 40px;
+    padding-top: 60px;
+}
+.sidebar-nav-fixed {
+    position:fixed;
+    top:60px;
+    /*width:21.97%;*/
+    width:400px;
+}
+@media (max-width: 767px) {
+    .sidebar-nav-fixed {
+        position:static;
+        width:auto;
+    }
+}
+@media (max-width: 979px) {
+    .sidebar-nav-fixed {
+        top:70px;
+    }
+}
+@media (max-width: 767px) {
+    body {
+        padding-top: 0;
+    }
+}
+@media (max-width: 979px) {
+    body {
+        padding-top: 0;
+    }
+}
+
+#mainCtrl {
+    position: relative;
+    min-height: 100%;
+}
+#wrap {
+    /*padding-bottom:50px;*/
+}
+#footer {
+    width:100%;
+    border-top: 1px solid #cccccc;
+    /*height:50px;*/
+    position:absolute;
+    bottom:-100px;
+    padding-top:8px;
+}
+
+#now-loading {
+	position: fixed;
+	top: 45px;
+    /*right:18%;*/
+    right:10px;
+    z-index: 10;
+}
+
+#btn-crossFade {
+    position:absolute;
+    left:0px;
+    top:10px
+}
+#btn-repeat {
+    position:relative;
+    left:0px;
+    top:-12px
+}
+#btn-crossFade:focus {
+    border: 0px solid #000000;
+    outline: none;
+}
+
+.welcome {
+    margin-top:80px;
+    padding-bottom:20px;
+}
+    .welcome .search {
+        text-align:center;
+    }
+    .welcome .logo {
+        margin-top:80px;
+        text-align:right;
+    }
+
+.wide {
+    width:100%;
+    background-color:lightblue; 
+    position: relative; 
+    z-index:10;
+}
+.copyright {
+    text-align:right;
+    font-size:x-small;
+    /*float: right;*/
+}
+
+/* Tooltip */
+/*.tooltip2{
+    display: inline;
+    position: relative;    
+}
+.tooltip2:hover:after{
+    background: #333;
+    background: rgba(0,0,0,.8);
+    border-radius: 5px;
+    bottom: 26px;
+    color: #fff;
+    content: attr(data-hint);
+    left: 20%;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    width: 120px;
+}
+.tooltip2:hover:before{
+    border: solid;
+    border-color: #333 transparent;
+    border-width: 6px 6px 0 6px;
+    bottom: 20px;
+    content: "";
+    left: 50%;
+    position: absolute;
+    z-index: 99;
+}*/
+.help-inline {
+    color:red;
+    display:block;
+}
+
+
+.view-title {
+    border-bottom: 1px solid #cccccc;
+    margin-bottom:20px;
+}
+    .view-title h3 {
+        margin-top: 0px;
+        margin-bottom: 5px;
+        color: #5a5a5a;
+    }
+    .view-title h4 {
+        margin-top: 0px;
+        color: #7a7a7a;
+    }
+
+table {
+	width: 100%;
+    margin-bottom:20px;
+}
+    table tr {
+        line-height:1.3em;
+    }
+
+    table tr .icon {
+        width:7%;
+        cursor: pointer;
+    }
+        table tr .icon img {
+            width: 16px;
+            height: 16px;
+        }
+    table tr .number {
+        text-align: right;
+    }
+    table tr .text {
+        padding-left: 10px;
+    }
+
+.sub-menu {
+}
+    .sub-menu li a {
+        color: gray;
+        font-weight: bold;
+    }
+
+.settings-true {
+    opacity: 1;
+}
+.settings-false {
+    opacity: 0.3;
+}
+
+
+.title-playing {
+    padding-bottom:5px;
+}
+    .title-playing .track-name {
+        font-size:16px;
+        line-height:1.2;
+        font-weight:bold;
+    }
+    .title-playing .track-artist {
+        color:black;
+    }
+        .title-playing .track-artist:hover {
+            color: hotpink;
+        }
+
+.artist-cloud {
+    margin-top: 20px;
+    margin-right:40px;
+}
+    .artist-cloud li {
+        line-height:1.6em;
+    }
+
+    .artist-cloud li .match10 {
+        font-size: 24px;
+    }
+    .artist-cloud li .match9 {
+        font-size: 22px;
+    }
+    .artist-cloud li .match8 {
+        font-size: 20px;
+    }
+    .artist-cloud li .match7 {
+        font-size: 19px;
+    }
+    .artist-cloud li .match6 {
+        font-size: 18px;
+    }
+    .artist-cloud li .match5 {
+        font-size: 16px;
+    }
+    .artist-cloud li .match4 {
+        font-size: 15px;
+    }
+    .artist-cloud li .match3 {
+        font-size: 14px;
+    }
+    .artist-cloud li .match2 {
+        font-size: 12px;
+    }
+    .artist-cloud li .match1 {
+        font-size: 11px;
+    }
+
+    .artist-cloud li a {
+        color:black;
+        margin-right:8px;
+    }
+        .artist-cloud li a:hover {
+            color:hotpink;
+        }
+
+
+.playing-true {
+    display: none;
+}
+
+.max-true {
+    display: none;
+}
+
+.unknown-true {
+    visibility:hidden;
+}
+
+
+.station-list {
+    /*margin-top: 10px;*/
+}
+    .station-list li {
+        position: relative;
+    }
+            /*.station-list li .active-true .icon {
+                position: absolute;
+                left:20px;
+                top: 15px;
+                width: 32px;
+                height: 32px;
+                background: url('img/Star On.png') no-repeat 0 0;
+            }*/
+
+        .station-list li .station {
+            margin:0;
+            background-color:#ffffff;
+            /*border:none;
+            border: 1px solid #888888;
+            border-radius:0px;
+            border-left:10px solid #999999;*/
+        }
+        .station-list li:hover .station {
+            /*background-color:#eeeeee;*/
+            border: 3px solid hotpink;
+        }
+        .station-list li .active-true {
+            /*border-width:thick;*/
+            /*border-left:10px solid hotpink;*/
+            /*border: 1px solid hotpink;*/
+            background-image: url(img/flowerbanner.gif);
+            background-size: contain;
+            background-position: right;
+            background-repeat: no-repeat;
+        }
+        .station-list li .station-name {
+            /*font-size:medium;
+            position:static;
+            color: black;
+            padding-left:40px;*/
+            font-size:medium;
+            color: black;
+        }
+        .station-list li:hover .station-name {
+            /*color: white;*/
+        }
+        .station-list li .icon {
+            /*position: absolute;
+            top: 15px;
+            width: 32px;
+            height: 32px;
+            background: url('img/Star Off.png') no-repeat 0 0;*/
+            width: 28px;
+            margin-right:5px;
+        }
+        .station-list li .icon-active-true {
+            /*position: absolute;
+            top: 15px;
+            background: url('img/Star On.png') no-repeat 0 0;*/
+        }
+
+        .station-list li .new-name {
+            position:absolute;
+            top:18px;
+            margin-left:34px;
+        }
+
+        .station-list li .station-remove {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            display: none;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            background: url(img/destroy.png) no-repeat 0 0;
+        }
+        .station-list li:hover .station-remove {
+            display: block;
+        }
+        .station-list li .station-remove:hover {
+            background-position: 0 -20px;
+        }
+
+        .station-list li .station-rename {
+            /*position: absolute;
+            right: 34px;
+            top: 10px;*/
+            display: none;
+            cursor: pointer;
+        }
+        .station-list li:hover .station-rename {
+            opacity: 0.3;
+            /*display: block;*/
+            display: inline;
+        }
+        .station-list li .station-rename:hover {
+            opacity: 1;
+        }
+
+.title-list {
+    margin-top: 10px;
+}
+    .title-list li {
+        padding: 4px 0px 4px 0;
+        position: relative;
+        /*font-size: 16px;*/
+        border-bottom: 1px solid #eeeeee;
+    }
+        .title-list li .title {
+            /*margin: 0 25px;*/
+            /*line-height: 1.4em;*/
+        }
+            .title-list li .title a {
+                display: block;
+            }
+            .title-list li .title .songName {
+                color: black;
+            }
+        .title-list li:hover .title {
+            font-weight: bold;
+        }
+        .title-list li img {
+            padding-right:10px;
+        }
+        .title-list li .play {
+            /*background-color:#fff; opacity: 0.5;*/
+            position:absolute; 
+            left:16px; 
+            top:20px;
+            width:16px;
+        }
+        .title-list li .play:hover {
+            border: 1px solid #000000;
+            opacity: 1;
+        }
+
+
+        .title-list li .remove {
+            position: absolute;
+            right: 0px;
+            top: 4px;
+            display: none;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            background: url(img/destroy.png) no-repeat 0 0;
+        }
+        .title-list li:hover .remove {
+            display: block;
+        }
+        .title-list li .remove:hover {
+            background-position: 0 -20px;
+        }
+
+.artist-list {
+    margin-top: 10px;
+}
+    .artist-list li {
+        padding: 0px 20px 0px 0;
+        position: relative;
+        /*font-size: 16px;*/
+        /*line-height: 2.2em;
+        border-bottom: 1px solid #cccccc;*/
+    }
+        .artist-list li .name {
+            margin: 0 25px;
+        }
+        .artist-list li:hover .name {
+            font-weight: bold;
+        }
+        .artist-list li .songless-true {
+            color:red;
+        }
+
+        .artist-list li .up {
+            position: absolute;
+            right: 20px;
+            top: -3px;
+            display: none;
+            cursor: pointer;
+        }
+            .artist-list li .up i {
+                zoom: 1.5;
+            }
+        .artist-list li .down {
+            position: absolute;
+            right: 0px;
+            top: -3px;
+            display: none;
+            cursor: pointer;
+        }
+            .artist-list li .down i {
+                zoom: 1.5;
+            }
+        .artist-list li:hover .up {
+            opacity: 0.3;
+            display: block;
+        }
+        .artist-list li:hover .up:hover {
+            opacity: 1;
+        }
+        .artist-list li:hover .down {
+            opacity: 0.3;
+            display: block;
+        }
+        .artist-list li:hover .down:hover {
+            opacity: 1;
+        }
+
+
+        .artist-list li .remove {
+            position: absolute;
+            left: 0px;
+            top: 1px;
+            display: none;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            background: url(img/destroy.png) no-repeat 0 0;
+        }
+        .artist-list li:hover .remove {
+            display: block;
+        }
+        .artist-list li .remove:hover {
+            background-position: 0 -20px;
+        }
+
+        .artist-list li .match {
+            position: absolute;
+            right: 44px;
+            top: 1px;
+            display: none;
+            font-size:xx-small;
+            color:gray;
+            /*cursor: pointer;
+            width: 60px;*/
+        }
+        .artist-list li:hover .match {
+            display: inline;
+        }
+        .artist-list li .match:hover {
+            /*background-position: 0 -20px;*/
+        }
+        .artist-list li .songs {
+            cursor: pointer;
+            display: none;
+        }
+        .artist-list li:hover .songs {
+            color:lightgray;
+            display: inline;
+        }
+        .artist-list li .songs:hover {
+            color:gray;
+        }
+        .artist-list li .songs-edit {
+            margin: 0 25px;
+        }
+
+
+.song-list {
+	margin-top: 5px;
+}
+    .song-list li {
+        position: relative;
+    }
+    .song-list li:hover {
+        font-weight: bold;
+    }
+
+        .song-list li .remove {
+            position: absolute;
+            left: 0px;
+            top: 1px;
+            display: none;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            background: url(img/destroy.png) no-repeat 0 0;
+        }
+        .song-list li:hover .remove {
+            display: block;
+        }
+        .song-list li .remove:hover {
+            background-position: 0 -20px;
+        }
+
+        .song-list li .favorite {
+            position: absolute;
+            right: 0px;
+            top: 1px;
+            display: none;
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+            background: url(icon-heart.png) no-repeat 0 0;
+        }
+        .song-list li:hover .favorite {
+            display: block;
+        }
+
+        .song-list li .thumbs-down {
+            position: absolute;
+        }
+        .song-list li:hover .song-rating {
+            display: block;
+        }
+
+#artist-profile {
+    background-repeat: no-repeat;
+    background-position: right top;
+    /*-moz-background-size:contain;
+    background-size:contain;*/
+}
+
+
