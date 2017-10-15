@@ -1350,27 +1350,27 @@ angular.module('radioServices', []).
         service.getVideoTitle = function(id, onSuccess, onError) {
             Debug.assert(onSuccess && onError, "getVideoTitle: success & error function required");
             ytService.getInfo(id, function (data) {
-                var entry = data.entry;
+                var entry = data.items;
                 Debug.dir(entry);
 
                 // エントリがない（見つからない？）
-                if (entry == null) {
+                if (entry == null || entry.length == 0) {
                     Debug.error(" エントリがない [" + id + "]");
                     onError("Video not found");
                     return;
                     // Viewのメッセージエリアにエラー表示するといった処理が必要
                 }
 
-                // 埋め込み拒否か？
-                if (entry['yt$noembed'] != null) {
-                    Debug.error("埋め込み拒否動画 (" + id + ") [" + entry['title']['$t'] + "]");
-                    onError("Embedding disabled by request");
-                    return;
-                    // Viewのメッセージエリアにエラー表示するといった処理が必要
-                }
+                // // 埋め込み拒否か？
+                // if (entry['yt$noembed'] != null) {
+                //     Debug.error("埋め込み拒否動画 (" + id + ") [" + entry['title']['$t'] + "]");
+                //     onError("Embedding disabled by request");
+                //     return;
+                //     // Viewのメッセージエリアにエラー表示するといった処理が必要
+                // }
 
                 // 動画タイトルを取得
-                var title = entry['title']['$t'];
+                var title = entry[0].snippet.title;
 
                 onSuccess(title);
 
